@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Handloom Society</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header{
+    background-color: rgb(214, 193, 193);
+padding: 30px;
+text-align: center;
+}
+
+.topnav{
+    background-color: rgb(145, 123, 121);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.topnav a{
+    padding: 15px 25px;
+    color: rgb(245, 217, 217);
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+
+}
+
+.topnav a:hover{
+background-color: rgb(208, 197, 202);
+    color: rgb(84, 46, 51);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f1ea;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* GRID SYSTEM */
+.container {
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+section {
+  min-height: 100vh;
+  padding: 6rem 0;
+  border-bottom: 1px solid #000;
+}
+
+/* HERO */
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+}
+
+.hero-text {
+  grid-column: 1 / span 7;
+}
+
+.hero h1 {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2px;
+}
+
+.hero p {
+  margin-top: 2rem;
+  font-weight: 400;
+  max-width: 500px;
+}
+
+.button {
+  margin-top: 2rem;
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border: 1px solid #000;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ABOUT */
+
+.about {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+}
+
+.about-text {
+  grid-column: 1 / span 6;
+}
+
+.about-stats {
+  grid-column: 8 / span 4;
+}
+
+.stat {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+/* PRODUCTS */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.product img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.product h3 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.product p {
+  font-weight: 300;
+}
+
+/* CONTACT */
+
+.contact {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.contact-text {
+  grid-column: 1 / span 6;
+}
+
+footer {
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+ <section>
+ <div class="header">
+            <h1>ERAVATHODY HANDLOOOM SOCIETY</h1>
+        </div>
+        <div class="topnav">
+            <a href="27-1.html"> Home </a>
+             <a href="#"> Process </a>
+              <a href="#"> Artisans </a>
+               <a href="#"> Products </a>
+               <a href="form.html"> Log Out </a>
+        </div>
+       </section>
+
+<section>
+  <div class="container hero">
+    <div class="hero-text">
+      <h1>HANDLOOM<br>SOCIETY</h1>
+      <p>Traditional weaving practices shaped by generations. Designed for contemporary living.</p>
+      <a href="#" class="button">Explore Collections</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="container about">
+    <div class="about-text">
+      <h2>Craft as System.</h2>
+      <p>
+        Our society preserves centuries-old weaving traditions while adapting them to modern aesthetics. 
+        Every textile is handwoven, ethically produced, and rooted in regional heritage.
+      </p>
+    </div>
+
+    <div class="about-stats">
+      <div class="stat">120+ Weavers</div>
+      <div class="stat">40 Years</div>
+      <div class="stat">100% Handwoven</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <div class="container products">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1598300053654-5b0f1f66e9d2" alt="">
+      <h3>Cotton Saree</h3>
+      <p>₹ 4,500</p>
+    </div>
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1618354691245-0d7f761c18c5" alt="">
+      <h3>Silk Shawl</h3>
+      <p>₹ 6,800</p>
+    </div>
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1617957743098-4ec8ad9c9d42" alt="">
+      <h3>Natural Dyed Stole</h3>
+      <p>₹ 2,300</p>
+    </div>
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1582571352035-efaa1f0b5ed4" alt="">
+      <h3>Handwoven Yardage</h3>
+      <p>₹ 1,800/m</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <div class="container contact">
+    <div class="contact-text">
+      <h2>Visit the Workshop</h2>
+      <p>
+        Main Road, Textile District<br>
+        Mon–Sat | 10AM–6PM<br>
+        info@handloomsociety.com
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Handloom Society
+  </footer>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+body{
+    background-color:black;
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.header{
+    background-color: rgb(65, 14, 13);
+padding: 30px;
+text-align: center;
+}
+
+h1{
+    color: rgb(239, 219, 219);
+    font-family: 'Poppins', sans-serif; font-weight: 800; text-align: center;
+    font-size: 45px;
+}
+h2{
+    color: rgb(142, 96, 89);
+    font-family: 'Poppins', sans-serif; font-weight: 700;
+    font-size: 30px;
+}
+h3{
+    color: rgb(207, 200, 200);
+    font-family: 'Poppins', sans-serif; font-weight: 600;
+    font-size: 20px;
+}
+p{
+    color: rgb(227, 203, 209);
+    font-family: 'Poppins', sans-serif; font-weight: 300;
+    font-size: 15px;
+}
+
+.topnav{
+    background-color: rgb(145, 123, 121);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.topnav a{
+    padding: 15px 25px;
+    color: rgb(245, 217, 217);
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+
+}
+
+.topnav a:hover{
+background-color: rgb(208, 197, 202);
+    color: rgb(84, 46, 51);
+}
+
+.section{
+    width: 33.33%;
+    float:left;
+    padding: 100px;
+}
+
+.section.left{
+    width:70%;
+}
+
+
+.section.middle{
+    width:30%;
+}
+
+.row{
+    display: flex;
+}
+
+.footer{  
+background-color: rgb(65, 14, 13);
+ padding: 30px;
+    text-align: center;
+}

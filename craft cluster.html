@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eravathody Handloom Society</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f5f1e8;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* GENERAL SECTION STYLE */
+section {
+  min-height: 100vh;
+  padding: 6rem 8%;
+  border-bottom: 1px solid #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* HERO */
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9rem;
+  line-height: 0.9;
+  letter-spacing: -2px;
+}
+
+.hero .location {
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.9rem;
+}
+
+.hero p {
+  margin-top: 2rem;
+  max-width: 500px;
+  font-weight: 300;
+}
+
+.button {
+  margin-top: 2rem;
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border: 1px solid #111;
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* ABOUT */
+.about h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+.about p {
+  max-width: 700px;
+}
+
+/* PRODUCTS */
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.product img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.product h3 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.product p {
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+/* CONTACT */
+.contact h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 900px) {
+  .hero h1 {
+    font-size: 5rem;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>
+    ERAVATHODY<br>
+    HANDLOOM<br>
+    SOCIETY
+  </h1>
+
+  <div class="location">
+    Thiruvilwamala · Thrissur
+  </div>
+
+  <p>
+    A collective of traditional weavers preserving Kerala’s textile heritage through handwoven cotton and silk.
+  </p>
+
+  <a href="#" class="button">View Our Weaves</a>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2>Craft as Continuity.</h2>
+
+  <p>
+    Founded to support skilled artisans in Thiruvilwamala, the Eravathody Handloom Society sustains generations of weaving knowledge. 
+    Every textile is produced on traditional looms, ensuring authenticity, quality, and sustainable livelihoods in the Thrissur district.
+  </p>
+</section>
+
+<!-- PRODUCT PREVIEW -->
+<section>
+  <div class="products">
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1618354691245-0d7f761c18c5" alt="">
+      <h3>Cotton Saree</h3>
+      <p>Handwoven · Natural dyes</p>
+    </div>
+
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1598300053654-5b0f1f66e9d2" alt="">
+      <h3>Traditional Dhoti</h3>
+      <p>Pure cotton · Hand finished</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Visit the Weaving Unit</h2>
+
+  <p>
+    Eravathody Handloom Society<br>
+    Thiruvilwamala<br>
+    Thrissur, Kerala<br>
+    Mon – Sat | 10AM – 6PM
+  </p>
+
+  <footer>
+    © 2026 Eravathody Handloom Society
+  </footer>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Functions</title>
+    </head>
+
+    <body>
+        <h3>JS Alert Box</h3>
+        <p id="demo_add"></p>
+        <p id="demo_mul"></p>
+
+        <script>
+            var a = 2,b = 3; //global var declared outside function
+            function myFirstFunction(){
+                var x = 5; //local var declared inside function
+                var y = x+a+b+10;
+                return y;
+            }
+            function mySecondFunction(){
+                var x = 2; //local var declared inside function
+                var y = x*a*b*10;
+                return y;
+            }
+
+            function myAlertFunctionAdd(){
+                window.alert("you added 2 numbers is your attention span that low??");
+            }
+            function myAlertFunctionMul(){
+                window.alert("i just want this class to end already pls");
+            }
+
+            document.getElementById("demo_add").innerHTML = "The value of y is "+ myFirstFunction();
+            document.getElementById("demo_mul").innerHTML = "The value of y is "+ mySecondFunction();
+        </script>
+
+        <p>
+            <button onclick = "myAlertFunctionAdd()">What have I done first?!</button>
+            <button onclick = "myAlertFunctionMul()">What have I done now?!</button>
+        </p>
+
+    </body>
+</html>

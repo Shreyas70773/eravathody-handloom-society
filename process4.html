@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Process — Eravathody Handloom Society</title>
+  <link rel="stylesheet" href="style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/chq4irm.css">
+  <style>
+
+    /* ─────────────────────────────────────────
+       PAGE HEADER
+    ───────────────────────────────────────── */
+    .page-header {
+      height: 500px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding: 15px;
+      overflow: hidden;
+    }
+    .bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;   /* THIS is key */
+  z-index: 0;
+}
+
+.video-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3;
+
+  background: none;
+  border: none;
+  color: #F5F0E8;
+
+  font-size: 18px;
+  cursor: pointer;
+
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.video-toggle:hover {
+  opacity: 1;
+}
+.video-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3;
+
+  display: flex;
+  gap: 12px;
+}
+
+.video-controls button {
+  background: none;
+  border: none;
+  color: #F5F0E8;
+
+  font-size: 16px;
+  cursor: pointer;
+
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.video-controls button:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+    .page-header-shadow {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(13,11,9,0.55) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+      
+    }
+    .page-header-text {
+    position: absolute;
+  bottom: -20px;   /* 🔥 THIS pushes it DOWN */
+  left: 0px;     /* keeps your alignment */
+  z-index: 2;     /* above the shadow */
+      
+    }
+    .page-header-text .section-rule  { 
+      background-color: var(--brass); 
+    }
+
+    .page-header-text .section-title { 
+      color: var(--bg); margin-bottom: 14px; 
+    }
+
+    .page-header-text .body-text     { 
+      color: rgba(245,240,232,0.75); max-width: 420px; 
+    }
+
+    /* ─────────────────────────────────────────
+       CLOTHESLINE SECTION
+    ───────────────────────────────────────── */
+   .clothesline-intro {
+  padding: 80px 60px 40px; /* TOP | LEFT-RIGHT | BOTTOM */
+ 
+}
+   
+.clothesline-intro .body-text {
+  max-width: 900px;  /* increase from current */
+}
+
+.rope-layer {
+  position: absolute;
+  top: 840px;   /* adjust slowly */
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  z-index: 1;  /* force it ABOVE everything */
+  pointer-events: none;
+}
+
+.rope-layer img {
+  width: 90%;
+  display: block;
+}
+    .process-slider {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   z-index: 2; /* 👈 ABOVE ROPE */
+}
+
+/* viewport */
+.slider-window {
+  overflow: hidden;
+  width: 60%; /* controls how many visible */
+}
+
+/* track */
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* each card */
+.step-card {
+  flex: 0 0 50%; /* 2 cards visible */
+  display: flex;
+  justify-content: center;
+}
+
+.step-card img {
+  width: 90%;
+}
+
+/* arrows */
+.arrow {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #B8975A;
+  padding: 20px;
+}
+    /* ─────────────────────────────────────────
+       CTA STRIP
+    ───────────────────────────────────────── */
+    .process-cta {
+      margin: 60px 60px 0;
+      padding: 56px 60px;
+      background-color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .process-cta-text .section-rule { background: var(--brass); margin-bottom: 18px; }
+    .process-cta-text h2 {
+      font-family: 'Aboreto', sans-serif;
+      font-size: 30px;
+      color: var(--bg);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .process-cta-text p {
+      font-size: 14px;
+      color: rgba(245,240,232,0.65);
+      max-width: 600px;
+      line-height: 1.9;
+    }
+    .process-cta-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* THIS makes it sit nicely in the empty space */
+}
+
+.process-cta-logo img {
+  width: 240px;  /* adjust size */
+  opacity: 0.85;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.process-cta-logo img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+    .process-cta-links {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       ILLUSTRATOR SPEC NOTE
+       Remove this block before final submission
+    ───────────────────────────────────────── */
+    .illustrator-note {
+      background: rgba(184,151,90,0.07);
+      border: 1px dashed rgba(184,151,90,0.4);
+      padding: 22px 28px;
+      margin: 40px 60px 0;
+      font-size: 13px;
+      color: var(--umber);
+      line-height: 1.9;
+    }
+    .illustrator-note strong { color: var(--ink); font-weight: 400; }
+    .illustrator-note code {
+      background: rgba(184,151,90,0.12);
+      padding: 1px 6px;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+
+  </style>
+</head>
+<body class="interior-page" onload="checkCookies()">
+
+<!-- NAV -->
+<nav id="navbar" class="scrolled">
+  <div class="nav-logo">
+     <img src="beige logo final.png" alt="Eravathody Handloom Society" style="height: 40px; width: auto;">
+  </div>
+  <ul class="nav-links">
+    <li><a href="index1.html"                   class="nav-link">Home</a></li>
+    <li><a href="craft.html"                   class="nav-link">Craft</a></li>
+    <li><a href="process4.html"                 class="nav-link active">Process</a></li>
+    <li><a href="artisans_filmstrip_page4.html"  class="nav-link">Artisans</a></li>
+    <li><a href="products.html"                class="nav-link">Products</a></li>
+    <li><a href="contact.html"                 class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="Downloads/WVMU9045.MP4" type="video/mp4">
+  </video>
+<div class="video-controls">
+  <button onclick="rewindVideo()"><<</button>
+  <button onclick="toggleVideo()">⏸</button>
+  <button onclick="forwardVideo()"></button>
+</div>
+  <div class="page-header-shadow"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="page-header-text">
+    <div class="section-rule"></div>
+    <h1 class="section-title">FROM COTTON<br>TO CLOTH</h1>
+    <p class="body-text">
+      Six steps, one saree. Here's what happens between the raw hank and the Handloom Mark.
+    </p>
+  </div>
+
+</div>
+
+<!-- ILLUSTRATOR SPEC NOTE — remove before submission -->
+<!--div class="illustrator-note">
+  <strong>📐 Note for illustrator — Mundu card dimensions</strong><br>
+  Each card is <strong>240px wide</strong>, made of three stacked layers:<br>
+  1. <strong>Cloth body:</strong> 240 × 272px — white/cream area. Step text sits here. Draw as plain woven cotton.<br>
+  2. <strong>Kasavu border band:</strong> 240 × 48px — illustrate as an actual woven Kasavu/zari border pattern at this size. Replace the gold CSS in <code>.mundu-kasavu</code> with your PNG or SVG.<br>
+  3. <strong>Fringe hem:</strong> 240 × 12px — loose thread fringe at the bottom edge.<br>
+  The clothespin area above the card: 22px wide × 28px tall.
+</div>
+
+<!-- CLOTHESLINE SECTION -->
+<div class="clothesline-section section-reveal">
+
+  <div class="clothesline-intro">
+    <div class="section-rule"></div>
+    <h2 class="section-title">SIX STEPS,<br>ONE SAREE</h2>
+    <p class="body-text">Each cloth that leaves Eravathody has passed through every one of these stages — by hand, every time.</p>
+  </div>
+
+<div class="rope-layer">
+          <img src="rope1.png" alt="">
+</div>
+
+ <div class="process-slider">
+
+  <button class="arrow left">←</button>
+
+  <div class="slider-window">
+    <div class="slider-track">
+
+      <!-- STEP -->
+      <div class="step-card">
+        <img src="step1.png" alt="">
+      </div>
+
+      <div class="step-card">
+        <img src="step2.png" alt="">
+      </div>
+
+      <div class="step-card">
+        <img src="step3.png" alt="">
+      </div>
+
+      <div class="step-card">
+        <img src="step4.png" alt="">
+      </div>
+
+      <div class="step-card">
+        <img src="step5.png" alt="">
+      </div>
+
+      <div class="step-card">
+        <img src="step6.png" alt="">
+      </div>
+
+    </div>
+  </div>
+
+  <button class="arrow right">→</button>
+
+</div>
+
+<!-- CTA STRIP -->
+<div class="process-cta section-reveal">
+  <div class="process-cta-text">
+    <div class="section-rule"></div>
+    <h2>EVERY PIECE IS MADE LIKE THIS</h2>
+    <p>No machines. No shortcuts. The Handloom Mark on every cloth from Eravathody is a guarantee that these six steps happened exactly as described — by hand, by the people you can meet here.</p>
+  </div>
+  <div class="process-cta-logo">
+  <img src="handloom mark.png" alt="Handloom Mark">
+</div>
+  <div class="process-cta-links">
+    <a href="products.html" class="btn-text light">See What We Make →</a>
+    <a href="contact.html"  class="btn-text light">Plan a Visit →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+ 
+  <div class="footer-inner">
+    <div class="footer-rule"></div>
+    <div class="footer-logo">
+  <img src="eravathody logo grey.png" class="footer-img">
+</div>
+    <p class="footer-tagline">A living textile archive — est. 1941</p>
+    <div class="footer-links">
+      <a href="index1.html">Home</a>
+      <a href="craft.html">Craft</a>
+      <a href="process4.html">Process</a>
+      <a href="artisans_filmstrip_page4.html">Artisans</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-address">Eravathody, Thiruvilwamala, Thrissur District, Kerala — 680 596</p>
+    <p class="footer-copy">© <span id="currentYear">2026</span> Eravathody Handloom Weavers' Co-operative Society.</p>
+  </div>
+</footer>x
+
+<script src="main.js"></script>
+</body>
+</html>
+
+
+<script src="main.js"></script>
+</body>
+</html>

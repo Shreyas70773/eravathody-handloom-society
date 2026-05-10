@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artisans — Eravathody Handloom Society</title>
+  <link rel="stylesheet" href="style1.css">
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/chq4irm.css">
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--ink);
+      font-family: 'futura-pt', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* Nav: always white text on this dark page */
+    #navbar { background-color: transparent !important; }
+    #navbar .nav-logo { color: var(--bg) !important; }
+    #navbar .nav-link  { color: rgba(245,240,232,0.65) !important; }
+    #navbar.scrolled {
+      background-color: rgba(13,11,9,0.82) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    /* ── HERO: exactly fills the viewport ── */
+    .artisan-page {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Two background layers for crossfade */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center top;
+      filter: sepia(15%) contrast(95%) grayscale(20%);
+      transition: opacity 0.55s ease;
+    }
+
+    /* Vignette: strong at top for nav, strong at bottom for text legibility */
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(13,11,9,0.60)  0%,
+          rgba(13,11,9,0.0)  22%,
+          rgba(13,11,9,0.0)  48%,
+          rgba(13,11,9,0.90) 100%
+        );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Top nav shadow */
+    .artisan-top-shadow {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 150px;
+      background: linear-gradient(to bottom, rgba(13,11,9,0.55) 0%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Page label — top right */
+    .artisan-page-label {
+      position: absolute;
+      top: 80px;
+      right: 44px;
+      z-index: 4;
+    }
+    .artisan-page-label span {
+      font-family: 'futura-pt', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.38em;
+      color: rgba(245,240,232,0.3);
+      text-transform: uppercase;
+    }
+
+    /* ── ARTISAN INFO — bottom-left, above filmstrip ── */
+    .artisan-info {
+      position: absolute;
+      bottom: 130px;       /* sits above the 110px filmstrip with a gap */
+      left: 60px;
+      z-index: 4;
+      color: var(--bg);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      text-align: left;
+      max-width: 600px;
+    }
+    .artisan-info.visible { opacity: 1; }
+
+    .info-label {
+      font-family: 'futura-pt', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 14px;
+    }
+
+    /* Left-aligned brass rule — NO margin:auto */
+    .info-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--brass);
+      margin: 0 0 20px 0;
+    }
+
+    /* Large name */
+    .info-name {
+      font-family: 'Aboreto', serif;
+      font-weight: 300;
+      font-size: clamp(52px, 6vw, 86px);
+      letter-spacing: 0.05em;
+      line-height: 1.0;
+      color: var(--bg);
+      margin-bottom: 14px;
+    }
+
+    .info-role {
+      font-family: 'futura-pt', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-bottom: 18px;
+    }
+
+    .info-bio {
+      font-family: 'futura-pt', sans-serif;
+      font-size: 14px;
+      color: rgba(245,240,232,0.62);
+      max-width: 420px;
+      line-height: 1.9;
+      /* NO margin:auto — stays left-aligned */
+    }
+
+    /* Counter — bottom right, just above filmstrip */
+    .artisan-counter {
+      position: absolute;
+      bottom: 126px;
+      right: 44px;
+      font-family: 'futura-pt', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: rgba(245,240,232,0.35);
+      z-index: 4;
+    }
+
+    /* ══════════════════════════════════════════════
+       FILMSTRIP — Granyon style
+       Key principles:
+       1. left:0  right:0  → full screen width, no width:px
+       2. overflow:visible → thumbs can scale upward past the bar edge
+       3. align-items:flex-end → thumbs anchor at bottom, so scaleY
+          makes them grow UPWARD
+       4. transform:scaleY on hover with transform-origin:bottom center
+          → the vertical elongation effect
+    ═══════════════════════════════════════════════ */
+    .filmstrip {
+      position: absolute;
+      bottom: 0;
+      left: 0;          /* FIX: was "left: ;" — empty value broke positioning */
+      right: 0;
+      /* NO width: property — left:0 + right:0 fills the full screen */
+      height: 110px;
+      background: rgba(13,11,9,0.75);
+      backdrop-filter: blur(6px);
+      border-top: 1px solid rgba(200,185,154,0.12);
+      z-index: 5;
+      display: flex;
+      align-items: flex-end;     /* anchor thumbnails to bottom of bar */
+      padding: 0;
+      gap: 1px;
+      overflow: visible;         /* CRITICAL: allows thumbs to grow above bar */
+    }
+
+    /* Each thumbnail */
+    .thumb {
+      flex: 1;                   /* all 11 share width equally — full screen */
+      min-width: 0;
+      height: 110px;             /* matches filmstrip height */
+      background-size: cover;
+      background-position: center top;   /* show faces, not torsos */
+      filter: sepia(20%) grayscale(60%) brightness(0.55);
+      border: none;
+      border-right: 1px solid rgba(13,11,9,0.6);
+      cursor: pointer;
+      position: relative;
+      /* transform-origin bottom: means scale grows UPWARD */
+      transform-origin: bottom center;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .thumb:last-child { border-right: none; }
+
+    /* HOVER: grow vertically upward — the Granyon effect */
+    .thumb:hover {
+      transform: scaleY(2.2);
+      filter: sepia(5%) grayscale(0%) brightness(0.95);
+      z-index: 10;
+    }
+
+    /* ACTIVE: full colour + brass bar at top */
+    .thumb.active {
+      filter: sepia(5%) grayscale(0%) brightness(0.9);
+      box-shadow: inset 0 3px 0 0 var(--brass);
+    }
+    /* Active + hovered: keep growing */
+    .thumb.active:hover {
+      transform: scaleY(2.2);
+      z-index: 10;
+    }
+
+    /* Name label inside each thumb */
+    .thumb-label {
+      position: absolute;
+      bottom: 7px;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: 'futura-pt', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0);  /* invisible by default */
+      transition: color 0.3s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 4px;
+      pointer-events: none;
+    }
+    /* Show name on hover or when active */
+    .thumb:hover .thumb-label,
+    .thumb.active .thumb-label {
+      color: rgba(245,240,232,0.75);
+    }
+
+  </style>
+</head>
+<body onload="checkCookies()">
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="beige logo final.png" alt="Eravathody Handloom Society" style="height: 40px; width: auto;">
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html"                    class="nav-link">Home</a></li>
+    <li><a href="craft.html"                    class="nav-link">Craft</a></li>
+    <li><a href="process.html"                  class="nav-link">Process</a></li>
+    <li><a href="artisans_filmstrip_page1.html"  class="nav-link active">Artisans</a></li>
+    <li><a href="products.html"                 class="nav-link">Products</a></li>
+    <li><a href="contact.html"                  class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- FULL-SCREEN FILMSTRIP HERO -->
+<div class="artisan-page" id="artisanPage">
+
+  <div class="hero-bg" id="bgA"></div>
+  <div class="hero-bg" id="bgB" style="opacity:0;"></div>
+
+  <div class="artisan-top-shadow"></div>
+  <div class="vignette"></div>
+
+  <div class="artisan-page-label"><span>The Weavers</span></div>
+
+  <!-- ARTISAN INFO — bottom-left -->
+  <div class="artisan-info" id="artisanInfo">
+    <p class="info-label" id="infoLabel">Master Weaver</p>
+    <div class="info-rule"></div>
+    <h2 class="info-name"  id="infoName">Sundaran</h2>
+    <p class="info-role"   id="infoRole">61 Years at the Loom</p>
+    <p class="info-bio"    id="infoBio">Kerala State Award Winner (2002). Creator of the Theyyam-inspired saree design that brought district-level recognition to the Society.</p>
+  </div>
+
+  <!-- Counter -->
+  <div class="artisan-counter" id="counter">01 / 011</div>
+
+  <!-- FULL-WIDTH FILMSTRIP -->
+  <div class="filmstrip" id="filmstrip"></div>
+
+</div>
+
+<!-- ARTISAN GRID BELOW -->
+<section style="padding: 100px 60px; background: var(--bg);" class="section-reveal">
+  <div class="section-rule"></div>
+  <h2 class="section-title">PEOPLE WORTH<br>KNOWING</h2>
+  <p class="body-text" style="margin-bottom: 56px;">Some have been at the loom for over 40 years. None of them think of it as a job.</p>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('6-2.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Master Weaver</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Sundaran</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">61 Years · State Award 2002</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Creator of the Theyyam-inspired saree design. The longest-decorated weaver in the Society's history.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('9.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Thread Preparation</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Annamalai</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">48 Years · Warp Specialist</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Responsible for warp setups across all 19 looms. His consistency in thread tension is the foundation of every piece.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('1.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Border Weaver</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Velligiri R</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">37 Years · Kasavu Specialist</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Specialises in the Kasavu zari border technique, integrating complex patterns without slowing production.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('7.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Quality & Finishing</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Meenakshi</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">28 Years · Inspector</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Oversees the washing, starching, and folding of each saree. The cooperative's last line of quality assurance.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('11.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Plain Weave</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Mani</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">35 Years · Weaver</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Produces the plain-weave mundu and fabric yardage that forms the bulk of the Society's day-to-day output.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('8.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Senior Weaver</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Arunachalan</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">40 Years · Weaver</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Trained by the founding generation — keeper of unwritten technical knowledge at the Society.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('5.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Colour Innovation</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Shobana</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">12 Years · Colour Weave</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Leads the Society's distinctive colour work — developing new weft palettes that have become a signature of Eravathody cloth.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('2.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Loom Preparation</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Guruvayoorappan</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">45 Years · Warper</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Masters the warping process — threading thousands of individual ends through heddle and reed for each new loom setup.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('3.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Senior Weaver</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Karuppan</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">40 Years · Weaver</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">One of the most experienced members of the cooperative — his craft embodies decades of unbroken tradition.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('4.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Colour Innovation</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Ramesh</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">12 Years · Colour Weave</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Brings fresh colour thinking to the cooperative — his palette experiments have expanded Eravathody's range.</p>
+      </div>
+    </div>
+
+    <div class="artisan-card">
+      <div class="artisan-photo" style="background-image: url('10-2.jpg')"></div>
+      <div style="padding: 18px 0 0;">
+        <p style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);margin-bottom:6px;">Loom Preparation</p>
+        <h3 style="font-family:'Aboreto',serif;font-size:22px;color:var(--ink);margin-bottom:4px;">Ganeshan</h3>
+        <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--brass);">45 Years · Warper</p>
+        <p style="font-size:14px;color:var(--umber);margin-top:12px;line-height:1.8;max-width:280px;">Masters the warping process — threading thousands of individual ends through heddle and reed for each new loom setup.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-divider-img"></div>
+  <div class="footer-inner">
+    <div class="footer-rule"></div>
+    <h3 class="footer-name">ERAVATHODY HANDLOOM SOCIETY</h3>
+    <p class="footer-tagline">Handwoven in Eravathody since 1941</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="craft.html">Craft</a>
+      <a href="process.html">Process</a>
+      <a href="artisans_filmstrip_page1.html">Artisans</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-address">Eravathody, Thiruvilwamala, Thrissur District, Kerala — 680 596</p>
+    <p class="footer-copy">© <span id="currentYear">2026</span> Eravathody Handloom Weavers' Co-operative Society.</p>
+  </div>
+</footer>
+
+<script>
+var artisans = [
+  { name:"Sundaran",        role:"61 Years at the Loom",    label:"Master Weaver",       bio:"Kerala State Award Winner (2002). Creator of the Theyyam-inspired saree design that brought district-level recognition to the Society.",  img:"6-2.jpg" },
+  { name:"Annamalai",       role:"48 Years · Warp Setup",   label:"Thread Preparation",  bio:"Responsible for preparing warp setups across all 19 looms. His consistency in thread tension is the foundation of every piece.",         img:"9.jpg" },
+  { name:"Velligiri R",     role:"37 Years · Kasavu",       label:"Border Weaver",       bio:"Specialises in the Kasavu zari border technique, integrating complex patterns without slowing production pace.",                          img:"1.jpg" },
+  { name:"Meenakshi",       role:"28 Years · Inspector",    label:"Quality & Finishing", bio:"Oversees the washing, starching, and folding of each saree. The cooperative's last line of quality assurance before the Handloom Mark.",   img:"7.jpg" },
+  { name:"Mani",            role:"35 Years · Weaver",       label:"Plain Weave",         bio:"Produces the plain-weave mundu and fabric yardage that forms the bulk of the Society's day-to-day output.",                               img:"11.jpg" },
+  { name:"Arunachalan",     role:"40 Years · Weaver",       label:"Senior Weaver",       bio:"One of the most experienced weavers at the Society. Trained by the founding generation — keeper of unwritten technical knowledge.",       img:"8.jpg" },
+  { name:"Shobana",         role:"12 Years · Colour Weave", label:"Colour Innovation",   bio:"Leads the Society's distinctive colour work — developing new weft palettes that have become a signature of Eravathody cloth.",            img:"5.jpg" },
+  { name:"Guruvayoorappan", role:"45 Years · Warper",       label:"Loom Preparation",    bio:"Masters the warping process — threading thousands of individual ends through heddle and reed for each new loom setup.",                   img:"2.jpg" },
+  { name:"Karuppan",        role:"40 Years · Weaver",       label:"Senior Weaver",       bio:"One of the most experienced members of the cooperative — his craft embodies decades of unbroken tradition.",                             img:"3.jpg" },
+  { name:"Ramesh",          role:"12 Years · Colour Weave", label:"Colour Innovation",   bio:"Brings fresh colour thinking to the cooperative — his palette experiments have expanded Eravathody's range.",                            img:"4.jpg" },
+  { name:"Ganeshan",        role:"45 Years · Warper",       label:"Loom Preparation",    bio:"Masters the warping process — threading thousands of individual ends through heddle and reed for each new loom setup.",                   img:"10-2.jpg" }
+];
+
+var currentIndex = 0;
+var bgActive    = 'A';
+var bgA         = document.getElementById('bgA');
+var bgB         = document.getElementById('bgB');
+var infoName    = document.getElementById('infoName');
+var infoRole    = document.getElementById('infoRole');
+var infoLabel   = document.getElementById('infoLabel');
+var infoBio     = document.getElementById('infoBio');
+var artisanInfo = document.getElementById('artisanInfo');
+var counter     = document.getElementById('counter');
+var filmstrip   = document.getElementById('filmstrip');
+
+function setBackground(imgUrl) {
+  if (bgActive === 'A') {
+    bgB.style.backgroundImage = 'url(' + imgUrl + ')';
+    bgB.style.opacity = '1';
+    bgA.style.opacity = '0';
+    bgActive = 'B';
+  } else {
+    bgA.style.backgroundImage = 'url(' + imgUrl + ')';
+    bgA.style.opacity = '1';
+    bgB.style.opacity = '0';
+    bgActive = 'A';
+  }
+}
+
+function activateArtisan(idx) {
+  currentIndex = idx;
+  var a = artisans[idx];
+  setBackground(a.img);
+
+  artisanInfo.classList.remove('visible');
+  setTimeout(function() {
+    infoName.textContent  = a.name;
+    infoRole.textContent  = a.role;
+    infoLabel.textContent = a.label;
+    infoBio.textContent   = a.bio;
+    artisanInfo.classList.add('visible');
+  }, 120);
+
+  var n = idx + 1;
+  var total = artisans.length;
+  counter.textContent = (n < 10 ? '0' + n : n) + ' / 0' + total;
+
+  var thumbs = filmstrip.querySelectorAll('.thumb');
+  for (var t = 0; t < thumbs.length; t++) {
+    thumbs[t].classList.toggle('active', t === idx);
+  }
+}
+
+/* Build filmstrip */
+artisans.forEach(function(a, i) {
+  var div = document.createElement('div');
+  div.className = 'thumb' + (i === 0 ? ' active' : '');
+  div.style.backgroundImage = 'url(' + a.img + ')';
+
+  /* Name label inside each thumb */
+  var lbl = document.createElement('span');
+  lbl.className = 'thumb-label';
+  lbl.textContent = a.name;
+  div.appendChild(lbl);
+
+  (function(idx) {
+    div.addEventListener('mouseenter', function() { activateArtisan(idx); });
+    div.addEventListener('click',      function() { activateArtisan(idx); });
+  })(i);
+
+  filmstrip.appendChild(div);
+});
+
+/* Initialise */
+bgA.style.backgroundImage = 'url(' + artisans[0].img + ')';
+bgActive = 'A';
+artisanInfo.classList.add('visible');
+</script>
+<script src="main.js"></script>
+</body>
+</html>

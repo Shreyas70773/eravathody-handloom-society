@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://eravathodyhandloom.in/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://eravathodyhandloom.in/websitebg2-Picsart-AiImageEnhancer2.png</image:loc>
+      <image:title>Eravathody Handloom Society — Woven Through Generations</image:title>
+      <image:caption>Weaver at work — Eravathody Handloom Weavers' Co-operative Society, Thrissur, Kerala</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Craft page -->
+  <url>
+    <loc>https://eravathodyhandloom.in/craft.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://eravathodyhandloom.in/DSC05189.jpg</image:loc>
+      <image:title>The Craft — Handloom Weaving at Eravathody, Kerala</image:title>
+      <image:caption>Five chapters of handloom craft — Thread, Loom, Weave, Pattern, Cloth</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Process page -->
+  <url>
+    <loc>https://eravathodyhandloom.in/process5.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://eravathodyhandloom.in/websitebg2-Picsart-AiImageEnhancer2.png</image:loc>
+      <image:title>From Cotton to Cloth — The Handloom Weaving Process</image:title>
+      <image:caption>The step-by-step weaving process at Eravathody Handloom Society, Kerala</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Artisans page -->
+  <url>
+    <loc>https://eravathodyhandloom.in/artisans_filmstrip_page4.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://eravathodyhandloom.in/6-2.jpg</image:loc>
+      <image:title>Master Weaver Sundaran — Eravathody Handloom Society, Kerala</image:title>
+      <image:caption>State Award winner Sundaran, 61 years at the loom</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Products page -->
+  <url>
+    <loc>https://eravathodyhandloom.in/products.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://eravathodyhandloom.in/DSC05749.jpg</image:loc>
+      <image:title>Kasavu Saree — Eravathody Handloom Society, Kerala</image:title>
+      <image:caption>Authentic Kasavu saree certified with the Handloom Mark</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Contact page -->
+  <url>
+    <loc>https://eravathodyhandloom.in/contact.html</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

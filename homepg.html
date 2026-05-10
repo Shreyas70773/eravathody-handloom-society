@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eravathody Handloom Society</title>
+<link rel="icon" type="image/x-icon" href="Downloads/favicon_io/crd icon.ico">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="homepgstyle.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="logo"> <img src="Downloads/beige logo final.png"> </div>
+    <nav class="nav-links">
+      <a href="#"> Home </a>
+              <a href="#cluster"> About </a>
+              <a href="#craft"> The Craft </a>
+              <a href="#"> Process</a>
+              <a href="#"> Artisans </a>
+              <a href="#"> Products </a>
+              <a href="#"> Contact </a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+   <div class="slider">
+    <div class="slide" style="background-image: url('Downloads/website bg bw-Picsart-AiImageEnhancer.png');"></div>
+    <div class="slide" style="background-image: url('Downloads/golddddd2.png');"></div>
+    <div class="slide" style="background-image: url('Downloads/eravathody2.png');"></div>
+    <div class="slide" style="background-image: url('Downloads/sssssdsdsds2.png');"></div>
+  </div>
+  <section class="hero">
+    <div class="section left">
+    <h1>
+      Woven<br>
+      through <br>
+      generations.
+    </h1>
+    <div></div>
+    <p>
+        Eravathody, a small village in Thiruvilwamala, Thrissur, carries a weaving legacy that dates back nearly 200 years. 
+        Brought here by the Raja of Kochi, Mudaliar weaving families from Tamil Nadu settled in the region to craft fine Kasavu garments for the royal household. 
+        Over generations, their skills evolved into a unique blend of Tamil and Kerala weaving traditions.
+
+
+      </p>
+    </div>
+    <div class="section right">
+    
+    </div>
+  </section>
+
+ <section class="cards">
+
+  <div class="card">
+    <img src="Downloads/_DSC6690.jpg" alt="Process">
+    <div class="card-label"><A href="#"> Process </A></div>
+  </div>
+
+  <div class="card">
+    <img src="Downloads/_DSC7700.jpg" alt="Products">
+    <div class="card-label"><a href="#">Products</a></div>
+  </div>
+
+  <div class="card">
+    <img src="Downloads/DSC04677.jpg" alt="Artisans">
+    <div class="card-label"><a href="#">Artisans</a></div>
+  </div>
+
+  <div class="card">
+    <img src="Downloads/_DSC7240.jpg" alt="Contact">
+    <div class="card-label"><a href="#"></a>Contact</div>
+  </div>
+
+</section>
+
+  <!-- ABOUT THE CLUSTER -->
+  <section class="cluster" id="cluster">
+    <div class="cluster-content">
+      <h1>About the Cluster</h1>
+      <P>Established in 1941, the Eravathody Handloom Weavers’ Co-operative Society now has 46 members and 19 looms, holding the Handloom Mark and known for its distinctive Kasavu borders and colour innovations. The society has earned district-level recognition, including honours for artisan Mr. Sundaram Mudali’s intricate Theyyam-inspired saree design.</P>
+ </div>
+    </section>
+
+  <!-- craft SECTION -->
+  <section class="craft" id="craft">
+    <h1>The Craft</h1>
+  </section>
+
+<section class="footer-visual" id="footer-visual">
+  <!-- CONTACT -->
+  <footer id="contact">
+    <p>
+      Eravathody Handloom Society<br>
+      Thiruvilwamala, Thrissur, Kerala<br>
+      Mon–Sat | 10AM–6PM
+    </p>
+    <p>© 2026 Eravathody Handloom Society</p>
+  </footer>
+
+</section>
+<script>
+  const slider = document.querySelector(".slider");
+  const arrow = document.querySelector(".right-arrow");
+
+  let current = 0;
+  const totalSlides = document.querySelectorAll(".slide").length;
+
+  arrow.addEventListener("click", () => {
+    current = (current + 1) % totalSlides;
+    slider.style.transform = `translateX(-${current * 100}vw)`;
+  });
+</script>
+</body>
+</html>

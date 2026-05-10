@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign in to proceed</title>
+    <link rel="icon" type="image/x-icon" href="Downloads/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+    input, select {
+    background-color: rgb(224, 194, 202);
+    font-family: 'Poppins', sans-serif; text-align: center; 
+    }
+    
+    .header{
+    background-color: rgb(65, 14, 13);
+padding: 30px;
+text-align: center;
+}
+
+    input:focus, select:focus{
+    background-color: "plum"; align-items: center;
+    }
+
+    h1{
+    color: rgb(239, 219, 219);
+    font-family: 'Poppins', sans-serif; font-weight: 800; text-align: center;
+    font-size: 45px;
+}
+h2{
+    color: rgb(142, 96, 89);
+    font-family: 'Poppins', sans-serif; font-weight: 700; text-align: center;
+    font-size: 30px;
+}
+h3{
+    color: rgb(207, 200, 200);
+    font-family: 'Poppins', sans-serif; font-weight: 600;
+    font-size: 20px;
+}
+
+label {
+    color: rgb(239, 219, 219);
+    font-family: 'Poppins', sans-serif; text-align: center;
+}
+
+body{
+    background-color:black;
+     font-family: 'Poppins', sans-serif;
+    margin:0;
+}
+
+.centerBox {
+        width: 400px;
+        margin: auto;
+        margin-top: 80px;
+        text-align: center;
+    }
+
+
+</style>
+    <script>
+        function pageLoaded() {
+            alert("Page is loaded!");
+        }
+
+        function focusName() {
+            document.getElementById("name").style.backgroundColor = "darkred";
+        }
+function focusAge() {
+            document.getElementById("age").style.backgroundColor = "darkred";
+        }
+        function genderChanged() {
+            var g = document.getElementById("gender").value;
+            
+            alert("You selected: " + g);
+        }
+
+        function focusGender() {
+            document.getElementById("gender").style.backgroundColor = "darkred";
+        }
+
+function focusPh() {
+            document.getElementById("ph").style.backgroundColor = "darkred";
+        }
+        
+        function focusDob() {
+            document.getElementById("dob").style.backgroundColor = "darkred";
+        }
+
+        function focusPwd() {
+            document.getElementById("pwd").style.backgroundColor = "darkred";
+        }
+        
+         function focusEmail() {
+            document.getElementById("email").style.backgroundColor = "darkred";
+        }
+          function submitForm() {
+    var name = document.getElementById("name").value;
+    
+    var age = document.getElementById("age").value;
+    var gender = document.getElementById("gender").value;
+    var phone = document.getElementById("ph").value;
+
+    alert("Name: " + name +
+          "\nAge: " + age +
+          "\nGender: " + gender +
+          "\nPhone: " + phone);
+}
+       
+           function submitForm() {
+    var name = document.getElementById("name").value;
+    var age = document.getElementById("age").value;
+
+    alert("Form submitted successfully!");
+
+    window.location.href = "27-1.html";
+}
+     
+    </script>
+</head>
+
+<body onload="pageLoaded()">
+     <div class="header">
+            <h1>EM'S ARCHIVE</h1>
+     </div>
+<h2> Sign in to proceed </h2>
+<div class="centerBox">
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" onfocus="focusName()">
+        <br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" onfocus="focusAge()">
+        <br><br>
+
+        
+        <label for="phone">Contact number:</label>
+        <input type="tel" id="ph" onfocus="focusPh()">
+        <br><br>
+
+
+        <label for="gender">Gender:</label>
+        <select id="gender" onchange="genderChanged()" onfocus="focusGender()">
+            <option value="">--Select--</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+<br><br>
+
+        <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" onfocus="focusDob()">
+<br><br>
+
+        <label for="pwd"> Password:</label>
+                    <input type="password" id="pwd" name="pwd" placeholder="create a password" onfocus="focusPwd()">           
+        <br><br>
+
+        <label for="email">Email ID:</label>
+                    <input type="email" id="email" name="email" placeholder="email id" onfocus="focusEmail()">
+                      <br><br>
+        <input type="button" value="Submit" onclick="submitForm()">
+<br><br>
+  <br><br>
+  </form>
+</div>
+<div class="header">
+            <h3> © em's archive </h3>
+        </div>
+</body>
+</html>

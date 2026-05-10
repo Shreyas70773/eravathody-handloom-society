@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eravathody Handloom Society</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #c9a84c;
+      --cream: #f0e8d8;
+      --dark: #0d0d0d;
+      --transition: 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    body {
+      font-family: 'EB Garamond', serif;
+      background: var(--dark);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ── SLIDER ── */
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Slide backgrounds (gradient overlays + SVG-generated texture stand-ins) */
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      transition: transform var(--transition);
+    }
+    .slide.active .slide-bg { transform: scale(1); }
+
+    /* Individual slide colour palettes */
+    .slide:nth-child(1) .slide-bg {
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,.82) 40%, rgba(0,0,0,.25) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='550'%3E%3Crect width='900' height='550' fill='%23111'/%3E%3Cg opacity='.9'%3E%3C!-- diagonal threads --%3E%3Cline x1='0' y1='80' x2='900' y2='120' stroke='%23888' stroke-width='3'/%3E%3Cline x1='0' y1='140' x2='900' y2='175' stroke='%23999' stroke-width='2.5'/%3E%3Cline x1='0' y1='200' x2='900' y2='230' stroke='%23777' stroke-width='3'/%3E%3Cline x1='0' y1='260' x2='900' y2='285' stroke='%23888' stroke-width='2'/%3E%3Cline x1='0' y1='320' x2='900' y2='340' stroke='%23999' stroke-width='3'/%3E%3Cline x1='0' y1='380' x2='900' y2='395' stroke='%23777' stroke-width='2.5'/%3E%3Cline x1='0' y1='440' x2='900' y2='450' stroke='%23888' stroke-width='3'/%3E%3Cline x1='0' y1='500' x2='900' y2='505' stroke='%23999' stroke-width='2'/%3E%3C!-- gold accent thread --%3E%3Cline x1='400' y1='0' x2='620' y2='550' stroke='%23c9a84c' stroke-width='28' opacity='.85'/%3E%3Cline x1='440' y1='0' x2='660' y2='550' stroke='%23c9a84c' stroke-width='8' opacity='.4'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .slide:nth-child(2) .slide-bg {
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,.82) 40%, rgba(0,0,0,.3) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='550'%3E%3Crect width='900' height='550' fill='%230a0a0a'/%3E%3Cg%3E%3Crect x='0' y='40' width='900' height='6' fill='%23555'/%3E%3Crect x='0' y='90' width='900' height='4' fill='%23444'/%3E%3Crect x='0' y='140' width='900' height='7' fill='%23555'/%3E%3Crect x='0' y='195' width='900' height='4' fill='%23444'/%3E%3Crect x='0' y='245' width='900' height='6' fill='%23555'/%3E%3Crect x='0' y='295' width='900' height='4' fill='%23444'/%3E%3Crect x='0' y='345' width='900' height='7' fill='%23555'/%3E%3Crect x='0' y='400' width='900' height='4' fill='%23444'/%3E%3Crect x='0' y='450' width='900' height='6' fill='%23555'/%3E%3Crect x='0' y='500' width='900' height='4' fill='%23444'/%3E%3Crect x='200' y='0' width='6' height='550' fill='%23444'/%3E%3Crect x='350' y='0' width='4' height='550' fill='%23333'/%3E%3Crect x='500' y='0' width='7' height='550' fill='%23444'/%3E%3Crect x='650' y='0' width='4' height='550' fill='%23333'/%3E%3Crect x='800' y='0' width='6' height='550' fill='%23444'/%3E%3Crect x='50' y='0' width='35' height='550' fill='%23c9a84c' opacity='.6'/%3E%3Crect x='58' y='0' width='8' height='550' fill='%23c9a84c' opacity='.9'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .slide:nth-child(3) .slide-bg {
+      background-image:
+        linear-gradient(105deg, rgba(0,0,0,.88) 35%, rgba(20,12,0,.4) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='550'%3E%3Crect width='900' height='550' fill='%23080808'/%3E%3Cg opacity='.8'%3E%3Cline x1='0' y1='0' x2='900' y2='550' stroke='%23666' stroke-width='2'/%3E%3Cline x1='100' y1='0' x2='900' y2='480' stroke='%23555' stroke-width='1.5'/%3E%3Cline x1='200' y1='0' x2='900' y2='415' stroke='%23666' stroke-width='2'/%3E%3Cline x1='300' y1='0' x2='900' y2='350' stroke='%23555' stroke-width='1.5'/%3E%3Cline x1='400' y1='0' x2='900' y2='280' stroke='%23666' stroke-width='2'/%3E%3Cline x1='500' y1='0' x2='900' y2='210' stroke='%23555' stroke-width='1.5'/%3E%3Cline x1='0' y1='100' x2='900' y2='550' stroke='%23555' stroke-width='1.5'/%3E%3Cline x1='0' y1='200' x2='800' y2='550' stroke='%23666' stroke-width='2'/%3E%3Cline x1='0' y1='300' x2='700' y2='550' stroke='%23555' stroke-width='1.5'/%3E%3Cline x1='0' y1='400' x2='600' y2='550' stroke='%23666' stroke-width='2'/%3E%3Cline x1='730' y1='0' x2='550' y2='550' stroke='%23c9a84c' stroke-width='30' opacity='.7'/%3E%3Cline x1='760' y1='0' x2='580' y2='550' stroke='%23c9a84c' stroke-width='6' opacity='.35'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* ── CONTENT ── */
+    .slide-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 7vw;
+      padding-top: 80px;
+    }
+
+    .hero-label {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+    }
+    .slide.active .hero-label { opacity: 1; transform: translateY(0); }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 400;
+      line-height: 1.0;
+      color: var(--cream);
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease 0.45s, transform 0.8s ease 0.45s;
+    }
+    .slide.active .hero-title { opacity: 1; transform: translateY(0); }
+
+    .hero-body {
+      margin-top: 2rem;
+      max-width: 480px;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(240,232,216,.72);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease 0.65s, transform 0.8s ease 0.65s;
+    }
+    .slide.active .hero-body { opacity: 1; transform: translateY(0); }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 5vw;
+      background: linear-gradient(to bottom, rgba(0,0,0,.6) 0%, transparent 100%);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cream);
+    }
+    .logo-dots { font-size: 1.1rem; letter-spacing: 2px; color: var(--gold); }
+    .logo-text { font-family: 'Playfair Display', serif; font-size: 1.05rem; line-height: 1.25; }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      color: rgba(240,232,216,.8);
+      text-decoration: none;
+      padding: 6px 18px;
+      border: 1px solid rgba(240,232,216,.2);
+      border-radius: 999px;
+      transition: border-color .3s, color .3s, background .3s;
+    }
+    .nav-links a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201,168,76,.07);
+    }
+
+    /* ── ARROW ── */
+    .arrow-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.18);
+      color: var(--cream);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: background .3s, border-color .3s, transform .25s;
+      backdrop-filter: blur(4px);
+    }
+    .arrow-btn:hover {
+      background: rgba(201,168,76,.2);
+      border-color: var(--gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .arrow-btn.left { left: 24px; }
+    .arrow-btn.right { right: 24px; }
+
+    /* ── DOTS ── */
+    .dots {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 50;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(240,232,216,.3);
+      border: 1px solid rgba(240,232,216,.3);
+      cursor: pointer;
+      transition: background .4s, transform .3s, border-color .4s;
+    }
+    .dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: scale(1.3);
+    }
+
+    /* ── SLIDE COUNTER ── */
+    .counter {
+      position: fixed;
+      bottom: 34px;
+      right: 5vw;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: rgba(240,232,216,.45);
+      z-index: 50;
+    }
+    .counter span { color: var(--gold); font-size: 1rem; }
+
+    /* ── PROGRESS BAR ── */
+    .progress {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: var(--gold);
+      z-index: 50;
+      transition: width var(--transition);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <span class="logo-dots">⁞⁞⁞</span>
+    <div class="logo-text">Eravathody<br>Handloom Society</div>
+    <span class="logo-dots">⁞⁞⁞</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">The Craft</a></li>
+    <li><a href="#">Process</a></li>
+    <li><a href="#">Artisans</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- SLIDER -->
+<div class="slider" id="slider">
+
+  <div class="slide active">
+    <div class="slide-bg"></div>
+    <div class="slide-content">
+      <p class="hero-label">Est. 200 Years · Thrissur, Kerala</p>
+      <h1 class="hero-title">Woven through generations.</h1>
+      <p class="hero-body">Eravathody, a small village in Thiruvilwamala, Thrissur, carries a weaving legacy that dates back nearly 200 years. Brought here by the Raja of Kochi, Mudaliar weaving families from Tamil Nadu settled in the region to craft fine Kasavu garments for the royal household.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bg"></div>
+    <div class="slide-content">
+      <p class="hero-label">The Living Craft · Kasavu Tradition</p>
+      <h1 class="hero-title">Threads of a royal heritage.</h1>
+      <p class="hero-body">Each garment bears the signature gold zari border of Kasavu weaving — a tradition refined across generations. The loom is not merely a tool here; it is a living inheritance passed from father to son, mother to daughter, across two centuries of unbroken craft.</p>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bg"></div>
+    <div class="slide-content">
+      <p class="hero-label">Tamil & Kerala · A Unique Fusion</p>
+      <h1 class="hero-title">Two traditions, one fabric.</h1>
+      <p class="hero-body">Over generations, their skills evolved into a unique blend of Tamil and Kerala weaving traditions. This rare confluence gives Eravathody textiles their distinctive character — structurally precise yet flowing, rooted in heritage yet alive with innovation.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ARROWS -->
+<button class="arrow-btn left" id="prevBtn" aria-label="Previous slide">&#8249;</button>
+<button class="arrow-btn right" id="nextBtn" aria-label="Next slide">&#8250;</button>
+
+<!-- DOTS -->
+<div class="dots" id="dots"></div>
+
+<!-- COUNTER -->
+<div class="counter" id="counter"><span>01</span> / 03</div>
+
+<!-- PROGRESS -->
+<div class="progress" id="progress"></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+  const total = slides.length;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    d.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    counter.innerHTML = `<span>${String(current + 1).padStart(2,'0')}</span> / ${String(total).padStart(2,'0')}`;
+    progress.style.width = `${((current + 1) / total) * 100}%`;
+  }
+
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(current + 1);
+    if (e.key === 'ArrowLeft')  goTo(current - 1);
+  });
+
+  // Init progress bar
+  progress.style.width = `${(1 / total) * 100}%`;
+</script>
+</body>
+</html>

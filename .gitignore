@@ -1,0 +1,71 @@
+# ── Windows system / personal directories ──
+AppData/
+.cache/
+.claude/
+.copilot/
+.thumbnails/
+.vscode/
+.vscode-shared/
+3D Objects/
+Contacts/
+CrossDevice/
+Desktop/
+Documents/
+Favorites/
+Links/
+Music/
+OneDrive/
+Poliigon/
+Saved Games/
+Searches/
+Tracing/
+Videos/
+a30/
+crdsite/
+web design files/
+Dropbox/
+
+# Windows junction-point pseudo-folders (unreadable by Git)
+Application Data/
+Cookies/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+
+# Downloads — exclude personal files; keep only the CSS asset used by the About section
+Downloads/*
+!Downloads/IMG_3878.PNG
+
+# Personal dotfiles (not part of the website)
+.gitconfig
+.claude.json
+.bash_history
+.bash_profile
+.bashrc
+.profile
+NTUSER.DAT*
+ntuser.dat*
+
+# OS noise
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
+.DS_Store
+
+# Large binary files — host separately (video CDN, etc.)
+*.mp4
+*.MP4
+*.zip
+*.ZIP
+
+# Dropbox system / backup folders
+.dropbox_bi/
+
+# Intel GPU system files
+IntelGraphicsProfiles/

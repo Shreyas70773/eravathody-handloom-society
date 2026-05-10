@@ -1,0 +1,32 @@
+# robots.txt — Eravathody Handloom Weavers' Co-operative Society
+# https://eravathodyhandloom.in/
+
+User-agent: *
+Allow: /
+
+# Allow all primary content pages
+Allow: /index2.html
+Allow: /craft.html
+Allow: /process5.html
+Allow: /artisans_filmstrip_page4.html
+Allow: /products.html
+Allow: /contact.html
+
+# Disallow draft / dev pages
+Disallow: /index1.html
+Disallow: /homepg.html
+Disallow: /crdfade.html
+Disallow: /crdhomepg.html
+Disallow: /emermore.html
+Disallow: /form.html
+Disallow: /button.html
+Disallow: /ksdshfsjfhskjfh.html
+Disallow: /27-1.html
+Disallow: /progress.html
+Disallow: /website.html
+Disallow: /main page.html
+Disallow: /home page.html
+Disallow: /Downloads/
+
+# Sitemap location
+Sitemap: https://eravathodyhandloom.in/sitemap.xml

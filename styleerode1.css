@@ -1,0 +1,1618 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERAVATHODY HANDLOOM SOCIETY — STYLESHEET
+   Follows notes: px units, standard CSS, no rem/vh
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── CSS VARIABLES (Colors from notes: hex codes) ── */
+:root {
+  --bg:         #F6ECDF;
+  --ink:       #1C1713;
+  --umber:     #6B5E52;
+  --brass:     #B8975A;
+  --rule:      #C9B99A;
+  --white:     #FFFFFF;
+  --dark:      #0D0B09;
+}
+
+/* ── RESET & BASE ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: 'futura-pt', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.85;
+  /* Paper grain overlay */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── TYPOGRAPHY ── */
+.section-title {
+  font-family: 'Erode', serif;
+  font-weight: 300;
+  font-size: 48px;
+  letter-spacing: 0em;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 32px;
+}
+
+.body-text {
+   font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--umber);
+  max-width: 480px;
+}
+
+.section-rule {
+  width: 40px;
+  height: 1px;
+  background-color: var(--brass);
+  margin-bottom: 20px;
+}
+
+.btn-text {
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  border-bottom: 1px solid var(--brass);
+  padding-bottom: 2px;
+  display: inline-block;
+  margin-top: 24px;
+  transition: opacity 0.4s ease;
+  cursor: pointer;
+}
+
+.btn-text:hover {
+  opacity: 0.6;
+}
+
+.btn-text.light {
+  color: var(--bg);
+  border-color: var(--bg);
+}
+
+/* ── NAVIGATION ── */
+#navbar {
+   background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 60px;
+  z-index: 1000;
+  transition: background-color 0.5s ease, padding 0.4s ease;
+}
+
+#navbar.scrolled {
+  background-color: rgba(26, 25, 24, 0.974);
+  padding: 14px 60px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--bg);
+  transition: color 0.5s ease;
+}
+
+#navbar.scrolled .nav-logo {
+  color:rgb(145, 138, 127) ;
+}
+
+.logo-mark {
+  font-size: 18px;
+}
+
+.logo-text {
+   font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+}
+
+.nav-link {
+   font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  position: relative;
+  transition: color 0.5s ease, opacity 0.3s ease;
+}
+
+#navbar.scrolled .nav-link {
+  color: var(--bg);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--brass);
+  transition: width 0.4s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+/* ── HERO SECTION ── */
+#hero {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 750px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  /* Warm tone filter as per design notes */
+  filter: sepia(15%) contrast(95%);
+  pointer-events: none;
+}
+
+.hero-slide.active {
+  opacity: 1;
+    pointer-events: auto;
+}
+
+.hero-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(13,11,9,0.25) 0%, rgba(13,11,9,0.72) 100%);
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 100px;
+  left: 80px;
+  z-index: 2;
+  color: var(--bg);
+}
+
+.hero-location {
+  font-family: futura-pt, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 14px;
+}
+
+.hero-headline {
+  font-family: 'Erode', serif;
+  font-weight: 300;
+  font-size: 80px;
+  letter-spacing: 0em;
+  line-height: 0.95;
+  color: var(--bg);
+  margin-bottom: 18px;
+}
+
+.hero-sub {
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  max-width: 600px;
+  color: rgba(245,240,232,0.78);
+  line-height: 1.4;
+}
+
+/* Vertical thread progress line on right edge */
+.hero-scroll-line {
+  display: none;  
+}
+
+.hero-scroll-fill {
+  width: 1px;
+  height: 0;
+  background-color: var(--brass);
+  transition: height 0.05s linear;
+}
+.hero-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+
+   background: none;     /* removes fill */
+  border: none;         /* removes box */
+  outline: none;
+
+  color: var(--bg);
+
+  padding: 12px 16px;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.hero-prev { left: 20px; }
+.hero-next { right: 20px; }
+
+.hero-btn:hover {
+  background: rgba(13, 11, 9, 0.177);
+}
+.hero-counter {
+  position: absolute;
+  bottom: 32px;
+  right: 60px;
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0em;
+  color: rgba(245,240,232,0.65);
+  z-index: 5;
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245,240,232,0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-dot.active {
+  background: var(--brass);
+  transform: scale(1.4);
+}
+
+.hero-cta-right {
+  position: absolute;
+  right: 60px;
+  bottom: 130px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  align-items: flex-end;
+}
+
+/* pill style */
+.cta-pill {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 240px;
+  padding: 12px 22px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(245,240,232,0.35);
+
+  background: rgba(0,0,0,0.25);
+  color: var(--bg);
+
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-pill:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+  background: rgba(0,0,0,0.45);
+
+  transform: translateX(6px) scale(1.03);
+
+  box-shadow: 0 0 20px rgba(184,151,90,0.15);
+}
+
+/* ── FADE IN ANIMATION (from notes: opacity fade only) ── */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── SECTION REVEAL (scroll triggered) ── */
+.section-reveal {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+  margin: 0;
+  padding: 0;
+}
+
+.section-reveal.visible {
+  opacity: 1;
+}
+
+.reveal-item {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.reveal-item.visible {
+  opacity: 1;
+}
+
+/* ── ABOUT SECTION ── */
+.about {
+  min-height: 100vh;
+  padding: 96px 8%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 48px;
+    background:
+    linear-gradient(
+    to bottom,
+    rgba(246, 236, 223, 0) 65%,
+    rgba(246, 236, 223, 0.85) 90%,
+    #F6ECDF 100%
+  ),
+  url('Downloads/IMG_3878.PNG');
+  background-color: #F6ECDF;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding-top:6px;
+  padding-right: 60px;
+  color:#393837;
+  align-items: flex-start;
+justify-content: flex-end; 
+ position: relative;
+}
+
+.about img {
+  height: 900px;
+  width: auto;
+  object-fit: cover;
+}
+
+.about h1 {
+  font-family: 'Erode', serif;
+  text-align: right;
+  margin-top: 16px;
+  font-weight: 300;
+   font-size: 80px;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.about h3 {
+  margin-top: 16px;
+  font-weight: 600;
+  font-family: futura-pt, sans-serif;
+}
+
+.about p {
+  font-size: 14.4px;
+  font-weight: 200;
+  font-family: futura-pt, sans-serif;
+  max-width: 350px;      /* controls width */
+  text-align: right;
+  justify-content: flex-end; 
+   margin-left: auto;
+  
+  .about .btn-text {
+  display: inline-block;
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #B8975A;
+  border-bottom: 1px solid #B8975A;
+  padding-bottom: 2px;
+  margin-top: 24px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.about .btn-text:hover {
+  opacity: 0.6;
+}
+}
+
+/* ── DISCOVER SECTION ── */
+#discover {
+ padding: 40px 100px 0 100px;
+ margin-bottom: 100px;
+  background-color: #F6ECDF;
+  
+}
+
+#discover .section-title {
+  color: var(--ink);
+   font-size: 80px;
+}
+
+.discover-grid {
+  display: flex;
+  gap: 12px;
+  height: 420px;
+}
+
+.discover-card {
+  position: relative;
+  overflow: hidden;
+  flex: 1; /* ALL SAME SIZE */
+  cursor: pointer;
+  border: 1px solid var(--rule);
+  transition: flex 0.5s ease;
+}
+
+.discover-card.wide {
+  flex: 1.8;
+}
+
+.discover-card.narrow {
+  flex: 0.7;
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) contrast(90%);
+  transform: scale(1);          /* ← was scale(1.05), caused the jump */
+  transform-origin: center;
+  transition: 
+    transform 0.6s ease,
+    filter 0.6s ease;
+}
+
+.discover-card:hover .card-img {
+  transform: scale(1.04);       /* ← was scale(1.000), now a gentle zoom IN */
+  filter: grayscale(0%) contrast(100%);
+}
+
+.card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px 20px 20px;
+
+  background: linear-gradient(
+    to top,
+    rgba(13,11,9,0.8) 0%,
+    transparent 100%
+  );
+
+  transition: opacity 0.4s ease;
+}
+
+.card-label {
+  font-family: futura-pt, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+}
+.card-desc {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.discover-card:hover .card-label,
+.discover-card:hover .card-desc {
+  color: #FFFFFF;
+}
+
+
+/* ── HISTORY SECTION ── */
+#history {
+  padding: 60px 60px;
+  background-color: #F6ECDF;
+}
+
+.history-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+
+
+#history .section-title {
+  color: #B8975A;
+  font-size: 80px;
+}
+
+.history-title {
+  margin-left: 290px;
+}
+
+.history-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+/* side columns */
+.history-side {
+  width: 260px;
+  position: relative;
+  
+}
+
+/* images */
+.history-img {
+  width: 220px;
+  height: auto;
+  position: absolute;
+
+  opacity: 0.9;
+
+  filter:
+    sepia(12%)
+    contrast(94%);
+
+  transition: transform 0.4s ease;
+}
+
+.history-img:hover {
+  transform: scale(1.02);
+}
+
+.img1 {
+  top: 20px;
+  left: 10px;
+}
+
+.img2 {
+  top: 240px;
+  left: 40px;
+}
+
+.img3 {
+  top: 440px;
+  left: 30px;
+}
+
+.img4 {
+  top: 100px;
+  right: 80px;
+}
+
+.img5 {
+  top: 360px;
+  right: 60px;
+}
+
+/* ── BEAM WRAPPER
+   Flex row: thin beam track on left, timeline content on right ── */
+.beam-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* ── BEAM TRACK
+   The 2px vertical channel. JS injects #beamFill and #beamDot
+   inside this div on page load. ── */
+.beam-track {
+  width: 2px;
+  align-self: stretch;
+  min-height: 300px;
+  flex-shrink: 0;
+  background-color: rgba(184, 151, 90, 0.15);
+  position: relative;
+  margin-right: 40px;
+  border-radius: 2px;
+}
+
+/* ── BEAM FILL — grows downward as you scroll ── */
+#beamFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;                  /* JS sets this on every scroll event */
+  background: linear-gradient(to bottom, var(--brass), rgba(184,151,90,0.3));
+  border-radius: 2px;
+  transition: height 0.08s linear;
+}
+
+/* ── BEAM DOT — glowing circle that rides the tip of the fill ── */
+#beamDot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;                     /* JS sets this on every scroll event */
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--brass);
+  box-shadow:
+    0 0 0 3px rgba(184,151,90,0.15),
+    0 0 10px 4px rgba(184,151,90,0.3);
+  transition: top 0.08s linear;
+}
+
+/* ── TIMELINE — sits to the right of the beam track ── */
+.history-timeline {
+  flex: 1;
+}
+
+.year-s {
+  font-size: 0.65em;
+  vertical-align: baseline;
+  opacity: 1;
+}
+
+.timeline-item {
+  padding: 22px 0;
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.timeline-year {
+  font-family: 'Erode', serif;
+  font-weight: 300;
+  font-size: 36px;
+  letter-spacing: 0em;
+  color: var(--brass);
+  min-width: 110px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.timeline-text {
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: rgba(109, 104, 95, 0.72);
+  line-height: 1.9;
+  padding-top: 8px;
+}
+
+.timeline-rule {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(200,185,154,0.2);
+}
+
+/* ACTIVE TIMELINE ITEM — CLEAN HIGHLIGHT */
+.timeline-item.active-timeline {
+  background: rgba(13,11,9,0.85);
+  border-radius: 16px;
+
+  /* balanced spacing so it doesn’t jump */
+  padding: 24px 28px;
+  margin: 8px 0;
+
+  transition: all 0.35s ease;
+}
+
+/* TEXT COLORS WHEN ACTIVE */
+.timeline-item.active-timeline .timeline-year {
+  color: var(--bg);
+}
+
+.timeline-item.active-timeline .timeline-text {
+  color: rgba(245,240,232,0.85);
+}
+
+/* OPTIONAL: subtle movement (remove if you don’t want it) */
+.timeline-item.active-timeline {
+  transform: translateX(6px);
+}
+
+#beamDot {
+  cursor: grab;
+  touch-action: none;
+}
+
+#beamDot:active {
+  cursor: grabbing;
+}
+
+
+
+/* ── GALLERY SECTION ── */
+#gallery {
+  padding: 0 0 80px;
+}
+
+.gallery-hero {
+  position: relative;
+  height: 580px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.gallery-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  filter: sepia(15%) contrast(95%);
+}
+
+.gallery-slide.active-gal {
+  opacity: 1;
+}
+
+.gallery-label {
+  position: absolute;
+  bottom: 80px;
+  left: 60px;
+  z-index: 2;
+  color: var(--bg);
+}
+
+.gallery-title {
+  font-family: 'Erode', serif;
+  font-weight: 300;
+  font-size: 56px;
+  letter-spacing: 0em;
+  color: var(--bg);
+}
+
+.gallery-sub {
+ font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: rgba(245,240,232,0.75);
+  margin-top: 8px;
+}
+
+.gallery-counter {
+  position: absolute;
+  bottom: 24px;
+  right: 60px;
+  font-family: futura-pt, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0em;
+  color: rgba(245,240,232,0.65);
+  z-index: 5;
+}
+
+.gal-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 1px solid rgba(245,240,232,0.4);
+  color: var(--bg);
+  font-size: 18px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 5;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.gal-btn:hover {
+  background-color: rgba(245,240,232,0.15);
+  border-color: rgba(245,240,232,0.8);
+}
+
+.gal-prev { left: 30px; }
+.gal-next { right: 30px; }
+
+/* Contact sheet — archive-style grid */
+.contact-sheet {
+  display: flex;
+  gap: 10px;
+  padding: 0 60px;
+  height: 220px;
+}
+
+.cs-item {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  filter: sepia(20%) contrast(90%) grayscale(30%);
+  transition: filter 0.4s ease;
+  border: 1px solid var(--rule);
+}
+
+.cs-item.tall {
+  flex: 1.4;
+}
+
+.cs-item:hover {
+  filter: sepia(10%) contrast(98%) grayscale(0%);
+}
+/* ── CRAFT PAGE ── */
+.page-header {
+  height: 360px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  filter: sepia(15%) contrast(95%);
+}
+
+.page-header .hero-vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.page-header-text {
+  position: relative;
+  z-index: 2;
+  padding: 60px;
+  color: var(--bg);
+}
+
+.page-header-text .section-rule {
+  background-color: var(--brass);
+}
+
+.page-header-text .section-title {
+  color: var(--bg);
+  font-size: 64px;
+  margin-bottom: 8px;
+}
+
+.page-header-text .body-text {
+  color: rgba(245,240,232,0.75);
+}
+
+/* Chapter structure */
+.craft-chapter {
+  padding: 100px 60px 0px 60px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.craft-chapter.reverse {
+  flex-direction: row-reverse;
+}
+
+.chapter-num {
+  position: absolute;
+  font-family: 'Erode', serif;
+  font-size: 260px;
+  font-weight: 300;
+  color: rgba(28,23,19,0.04);
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: -0.05em;
+}
+
+.chapter-bg-img {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 600px; /* adjust size */
+  height: auto;
+
+  opacity: 1; /* THIS gives that subtle look */
+  pointer-events: none; /* so it doesn’t interfere */
+
+  z-index: 0; /* behind text */
+}
+.chapter-bg-imgone {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 1700px; /* adjust size */
+  height: auto;
+
+  opacity: 1; /* THIS gives that subtle look */
+  pointer-events: none; /* so it doesn’t interfere */
+
+  z-index: 0; /* behind text */
+}
+.chapter-bg-img.leftone {
+   left: 60px;
+  right: auto;
+
+  width: 80%;
+  max-width: 700px;
+  height: auto;
+}
+
+.chapter-bg-img.lefttwo {
+   left: 0px;
+  right: auto;
+
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+}
+
+.chapter-text {
+  flex: 1;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
+  
+}
+
+
+.chapter-label {
+   font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 14px;
+}
+
+.chapter-title {
+  font-family: 'Erode', serif;
+  font-weight: 300;
+  font-size: 42px;
+  letter-spacing: 0em;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.chapter-pull {
+  font-family: 'Erode', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: var(--umber);
+  line-height: 1.5;
+  margin: 28px 0;
+  padding-left: 20px;
+  border-left: 2px solid var(--brass);
+}
+
+.craft-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--rule);
+  margin: 0 60px;
+  width: calc(100% - 120px);
+}
+
+/* ── ARTISANS PAGE ── */
+.artisans-grid {
+  padding: 80px 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.artisan-card {
+  width: 340px;
+  cursor: default;
+}
+
+.artisan-photo {
+  width: 340px;
+  height: 420px;
+  background-size: cover;
+  background-position: top center;
+  filter: sepia(15%) contrast(95%) grayscale(20%);
+  border: 1px solid var(--rule);
+  transition: filter 0.4s ease;
+}
+
+.artisan-card:hover .artisan-photo {
+  filter: sepia(5%) contrast(100%) grayscale(0%);
+}
+
+.artisan-info {
+  padding: 20px 0 0;
+}
+
+.artisan-name {
+  font-family: 'Erode', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 0px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.artisan-role {
+   font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.artisan-bio {
+  font-size: 14px;
+  color: var(--umber);
+  margin-top: 12px;
+  line-height: 1.8;
+}
+
+/* ── PRODUCTS PAGE ── */
+.products-grid {
+  padding: 80px 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.product-card {
+  width: 300px;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.product-card:hover {
+  border-color: var(--brass);
+}
+
+.product-img {
+  width: 300px;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  filter: sepia(10%) contrast(95%);
+  transition: filter 0.4s ease;
+}
+
+.product-card:hover .product-img {
+  filter: sepia(0%) contrast(100%);
+}
+
+.product-info {
+  padding: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.product-name {
+  font-family: 'Erode', serif;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+.product-detail {
+  font-size: 12px;
+  letter-spacing: 0em;
+  color: var(--umber);
+  text-transform: uppercase;
+}
+
+/* ── PROCESS PAGE ── */
+.process-steps {
+  padding: 80px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.process-step {
+  display: flex;
+  gap: 60px;
+  padding: 60px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: flex-start;
+}
+
+.step-num {
+  font-family: 'Erode', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: rgba(184, 151, 90, 0.25);
+  line-height: 1;
+  min-width: 80px;
+  flex-shrink: 0;
+  padding-top: 6px;
+}
+
+.step-content { flex: 1; }
+
+.step-title {
+  font-family: 'Erode', serif;
+  font-size: 30px;
+  letter-spacing: 0em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.step-text {
+  font-size: 15px;
+  color: var(--umber);
+  line-height: 1.9;
+  max-width: 520px;
+}
+
+/* ── CONTACT PAGE ── */
+.contact-layout {
+  padding: 40px 60px;
+  display: flex;
+  gap: 1px;
+  align-items: flex-start;
+}
+.contact-intro {
+  padding-bottom: 20px; /* reduce the gap */
+}
+
+.contact-info { flex: 1; }
+
+.contact-detail {
+  margin-bottom: 36px;
+}
+
+.contact-label {
+   font-family: 'Erode', serif;futura-pt, sans-serif;
+  font-size: 20px;
+   font-weight: 500;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 6px;
+}
+.page-header-text .body-text {
+  max-width: 700px;
+  font-size: 17px; 
+}
+.contact-value {
+  font-family: futura-pt, sans-serif;
+  font-size: 17px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* FORM from notes: label + input pairs */
+.contact-form {
+  flex: 1;
+  max-width: 480px;
+}
+
+.form-group {
+  margin-bottom: 28px;
+}
+
+.form-group label {
+  display: block;
+  font-family: futura-pt, sans-serif;
+   font-weight: 600;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+  color: var(--umber);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 0;
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-bottom-color: var(--brass);
+}
+
+.form-group textarea {
+  resize: none;
+  height: 100px;
+  line-height: 1.8;
+}
+
+.form-group select {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-submit {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 14px 48px;
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  margin-top: 10px;
+}
+
+.form-submit:hover {
+  background-color: var(--ink);
+  color: var(--bg);
+}
+
+/* ── PAGE TRANSITION OVERLAY ── */
+#page-transition {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: var(--bg);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+#page-transition.fade-out {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── INTERIOR PAGE PADDING (accounts for fixed nav) ── */
+.interior-page {
+  padding-top: 0;
+}
+
+/* ── FOOTER ── */
+#footer {
+  background-color: var(--bg);
+  border-top: 1px solid var(--rule);
+  padding: 0;
+}
+
+.footer-divider-img {
+  width: 100%;
+  height: 120px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(184,151,90,0.08) 40px,
+    rgba(184,151,90,0.08) 41px
+  );
+  border-bottom: 1px solid var(--rule);
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.footer-img {
+  height: 80px;  /* or 40px for cleaner look */
+  width: auto;
+}
+
+.footer-inner {
+  text-align: center;
+  padding: 70px 60px 50px;
+}
+
+.footer-rule {
+  width: 40px;
+  height: 1px;
+  background-color: var(--brass);
+  margin: 0 auto 24px;
+}
+
+.footer-name {
+  font-family: 'Erode', serif;
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 0em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--umber);
+  margin-bottom: 36px;
+  font-style: italic;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 36px;
+}
+
+.footer-links a {
+  font-family: futura-pt, sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--umber);
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--brass);
+}
+
+.footer-address {
+  font-size: 13px;
+  color: var(--umber);
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(107,94,82,0.55);
+  letter-spacing: 0.05em;
+}
+
+/* ── INTERIOR SECTION PADDING ── */
+.interior-section {
+  padding: 80px 60px;
+}
+
+.interior-section .section-rule { margin-bottom: 16px; }
+
+.interior-section .section-title { margin-bottom: 24px; }
+
+/* ── CLIP-PATH REVEAL (curtain wipe for images) ── */
+.img-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.9s ease;
+}
+
+.img-reveal.revealed {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* ═══════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════ */
+
+@media screen and (max-width: 768px) {
+
+  /* NAV */
+  #navbar {
+    padding: 18px 20px;
+  }
+
+  .nav-links {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .nav-logo img {
+    height: 28px !important;
+  }
+
+  /* HERO */
+  #hero,
+  .hero-slide {
+    height: 100vh;
+  }
+
+  .hero-content {
+    left: 24px;
+    right: 24px;
+    bottom: 120px;
+  }
+
+  .hero-headline {
+    font-size: 48px;
+    line-height: 0.95;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    max-width: 100%;
+  }
+
+  .hero-location {
+    font-size: 11px;
+  }
+
+  /* CTA PILLS */
+  .hero-cta-right {
+    left: 24px;
+    right: 24px;
+    bottom: 36px;
+
+    align-items: stretch;
+  }
+
+  .cta-pill {
+    width: 100%;
+    min-width: unset;
+    font-size: 13px;
+  }
+
+  /* SECTION PADDING */
+  section,
+  .interior-section,
+  .about,
+  .craft-chapter,
+  .contact-layout {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* TITLES */
+  .section-title {
+    font-size: 42px;
+  }
+
+  /* GRID */
+  .products-grid {
+    padding: 0;
+    gap: 20px;
+  }
+
+  .product-card {
+    width: 100%;
+  }
+
+  .product-img {
+    width: 100%;
+    height: 420px;
+  }
+
+  /* CONTACT */
+  .contact-layout {
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .contact-illustration {
+    order: -1;
+  }
+
+  /* ARTISANS */
+  .artisan-info {
+    left: 24px;
+    right: 24px;
+    bottom: 120px;
+    max-width: 100%;
+  }
+
+  .info-name {
+    font-size: 54px;
+  }
+
+  .info-bio {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .filmstrip {
+    width: calc(100% - 24px);
+    height: 82px;
+  }
+
+  /* PROCESS PAGE */
+  .step-card {
+    flex: 0 0 100%;
+  }
+
+  .slider-window {
+    width: 100%;
+  }
+
+  /* CRAFT PAGE */
+  .craft-chapter {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .chapter-title {
+    font-size: 36px;
+  }
+
+  .chapter-bg-img,
+  .chapter-bg-imgone {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-top: 20px;
+  }
+
+}
